@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Probability_Of_Success
+{
+    class Number_Of_Combinations
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Working out the amount of sweet colour combinations\n");
+            Console.WriteLine("Input the amount of sweets in the bag; all being a unique colour");
+
+            int numn = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please input the amount of sweets that will be chosen");
+            int numr = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("The amount of different combinations that could be chosen is");
+            try
+            {
+                Console.WriteLine(Binomial.Ncr(numn, numr));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error Value Too large");
+            }
+        }//main
+    }//class
+}//namespace

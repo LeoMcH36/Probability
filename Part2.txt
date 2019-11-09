@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Probability_Of_Success
+{
+    class Binomial_Expansion
+    {
+        static void Main(string[] args)
+        {
+
+
+            Console.WriteLine("Input a positive Integer value for n for the expansion of (a+b)^n ");
+            int numn = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("The Binomial Expansion: ");
+            try
+            {
+                Console.WriteLine(Binomial.BinomialExpansion(numn));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error Value Too large");
+            }
+
+
+
+        }//main
+    }//class
+}//namespace

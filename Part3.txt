@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Probability_Of_Success
+{
+    class Probabilty_Calculator
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Input the probability of success P for selecting a cat as a decimal");
+            double numa = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Input the amount pets selected ");
+            int numn = Convert.ToInt32(Console.ReadLine());
+            double numb = 1 - numa;
+
+
+            try
+            {
+                Console.WriteLine(Binomial.ExactAndCumu(numn, numa, numb));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error Value Too large");
+            }
+
+
+        }//main
+    }//class
+}//namespace
+

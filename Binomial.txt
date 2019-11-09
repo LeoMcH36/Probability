@@ -1,0 +1,141 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Probability_Of_Success
+{
+    class Binomial
+    {
+        public static int Ncr(int n, int r)
+        {
+            //to get n!
+            int nFact = 1;
+            int i;
+            for (i = 1; i <= n; i++)
+            {
+                nFact = nFact * i;
+            }
+            //to get r!
+            int rFact = 1;
+
+            for (i = 1; i <= r; i++)
+            {
+                rFact = rFact * i;
+            }
+            //to get (n-r)!
+            int y = n - r;
+            int yFact = 1;
+
+            for (i = 1; i <= y; i++)
+            {
+                yFact = yFact * i;
+            }
+            //to get ncr
+            int ncr = nFact / (rFact * (yFact));
+
+            return ncr;
+        }//ncr
+
+        //to get value for a
+        public static double AValue(double numA, int numN, int numI)
+        {
+            double aValue = (double)Math.Pow(numA, (numN - numI));
+            return aValue;
+        }//aValue
+        //to get value for b
+
+        public static double BValue(double numB, int numN, int numI)
+        {
+            double bValue = (double)Math.Pow(numB, numN - (numN - numI));
+            return bValue;
+        }//bValue
+        //to get power of a
+
+        public static int APower(int numN, int numI)
+        {
+            int aPower = (numN - numI);
+            return aPower;
+        }//aPower
+        //to get power of b
+
+        public static int BPower(int numN, int numI)
+        {
+            int bPower = numN - (numN - numI);
+            return bPower;
+        }//bPower
+        //to get exact probability
+
+        public static double ExactProbability(int numn, int numx, double numa, double numb)
+        {
+            double prob = 0;
+            for (int i = 0; i <= numn; i++)
+            {
+                if (numx == Binomial.APower(numn, i)) //if no. successes equals power of a
+                {
+                    prob = (Binomial.Ncr(numn, i)) * (Binomial.AValue(numa, numn, i)) * (Binomial.BValue(numb, numn, i));
+                    //calculate probability
+                }//if
+            }//for
+
+            return prob;
+        }//exactProbability
+        //to get cumulative probability
+
+        public static double CumulataveProbability(int numn, int numx, double numa, double numb)
+        {
+            int nums;
+            double prob = 0;
+            for (nums = numx; nums <= numn; nums++)
+            {
+
+
+                prob += (Binomial.ExactProbability(numn, nums, numa, numb));
+                //add exact probabilty value for each amount of successes..
+                //... greater than the current amount which is possible
+
+
+            }//for
+            return prob;
+        }//cumulataveProbability
+        //to get the binomial expansion of (a + b )^n
+
+        public static string BinomialExpansion(int numn)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= numn; i++)
+            {
+
+                sb.Append(Binomial.Ncr(numn, i));
+                sb.Append("a^" + Binomial.APower(numn, i));
+                sb.Append("b^" + Binomial.BPower(numn, i));
+                if (i <= numn - 1)
+
+                {
+                    sb.Append(" + ");
+                }
+                else
+                {
+                    sb.Append(" ");
+                }
+            }//for
+            return sb.ToString();
+        }//binomialExpansion
+
+        public static string ExactAndCumu(int numn, double numa, double numb)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int numx = 0; numx <= numn; numx++)
+            {
+                sb.Append("The Probability that " + numx + " cats are selected: ");
+                sb.Append("\n");
+                sb.Append(Binomial.ExactProbability(numn, numx, numa, numb));
+                sb.Append("\n");
+                sb.Append("The Probability of at least " + numx + " are selected:  ");
+                sb.Append("\n");
+                sb.Append(Binomial.CumulataveProbability(numn, numx, numa, numb));
+                sb.Append("\n");
+            }//for
+            return sb.ToString();
+        }//exactAndCumu
+    }//class
+}//namespace
